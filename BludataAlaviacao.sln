@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BludataAlaviacao", "BludataAlaviacao\BludataAlaviacao.csproj", "{CF984042-A913-4ECD-B08F-01DA11D9FAC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcessoDados", "AcessoDados\AcessoDados.csproj", "{B7D9AB4B-D205-4622-9779-CFF9DD6B20AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CF984042-A913-4ECD-B08F-01DA11D9FAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF984042-A913-4ECD-B08F-01DA11D9FAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF984042-A913-4ECD-B08F-01DA11D9FAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D9AB4B-D205-4622-9779-CFF9DD6B20AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D9AB4B-D205-4622-9779-CFF9DD6B20AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D9AB4B-D205-4622-9779-CFF9DD6B20AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D9AB4B-D205-4622-9779-CFF9DD6B20AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
