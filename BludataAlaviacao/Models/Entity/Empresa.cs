@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BludataAlaviacao.Models.Entity
 {
-    [Table("tbl_empresa")]
+    [Table("tbl_empresa", Schema = "public")]
     public class Empresa
     {
         [Key]
