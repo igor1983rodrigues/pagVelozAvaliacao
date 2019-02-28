@@ -1,11 +1,13 @@
 ﻿using AcessoDados.BaseInterface;
 using Dapper;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace AcessoDados.BaseRepository
 {
@@ -14,8 +16,8 @@ namespace AcessoDados.BaseRepository
         protected DbConnection ObterConexao(string strConexao)
         {
             string strConnectionString = ConfigurationManager.ConnectionStrings[strConexao].ConnectionString;
-
-            return new Npgsql.NpgsqlConnection(strConnectionString);
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.PostgreSQL);
+            return new NpgsqlConnection(strConnectionString);
             //return new SqlConnection(strConnectionString);
         }
 

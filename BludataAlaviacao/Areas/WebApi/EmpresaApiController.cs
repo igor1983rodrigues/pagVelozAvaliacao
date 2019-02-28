@@ -24,7 +24,23 @@ namespace BludataAlaviacao.Areas.WebApi
         {
             try
             {
-                var res = await Task.Run(() => iEmpresaDao.ObterListaEmpresa(new { }, Resources.Conexao));
+                var res = await Task.Run(() => iEmpresaDao.ObterTodos(Resources.Conexao));
+
+                return Ok(res);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IHttpActionResult> Get(int id)
+        {
+            try
+            {
+                var res = await Task.Run(() => iEmpresaDao.ObterPorChave(id, Resources.Conexao));
 
                 return Ok(res);
             }
@@ -86,7 +102,7 @@ namespace BludataAlaviacao.Areas.WebApi
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("{id:int}")]
         public async Task<IHttpActionResult> ExcluirAsync(int id)
         {

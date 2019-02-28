@@ -1,5 +1,16 @@
-﻿<div class="bg-dark rounded shadow-sm p-3 w-auto">
-    <h3 class="h3 text-white">Empresas Cadastradas</h3>
+﻿<div class="bg-dark rounded shadow-sm p-3 w-auto" ng-init="startGrid()">
+    <div class="row">
+        <div class="col">
+            <h3 class="h3 text-white">Empresas Cadastradas</h3>
+        </div>
+        <div class="col-3 text-right">
+            <input type="text" class="form-control" ng-model="empresaSearch" placeholder="pesquisar" />
+            <button type="button" class="button-reset position-absolute v-center right-1" style="opacity: 0.5;">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+
     <table class="table bg-white">
         <thead class="thead-dark">
             <tr>
@@ -7,7 +18,7 @@
                 <th scope="col" class="border-top-0 w-50">Nome Fantasia</th>
                 <th scope="col" class="border-top-0">UF</th>
                 <th scope="col" class="border-top-0 w-50">CNPJ</th>
-                <th scope="col" class="border-top-0 text-right" colspan="3">
+                <th scope="col" class="border-top-0 text-right pr-0" colspan="3">
                     <a href="#/empresa/add" class="btn btn-primary">
                         Cadastrar
                     </a>
@@ -16,19 +27,19 @@
         </thead>
 
         <tbody>
-            <tr>
-                <td scope="row">0</td>
-                <td scope="row">teste</td>
-                <td scope="row">{{ 'sc' | uppercase }}</td>
-                <td scope="row">{{ '00000000000000' | cnpj }}</td>
+            <tr ng-repeat="empresa in empresas | filter:empresaSearch">
+                <td scope="row" ng-bind="empresa.idEmpresa"></td>
+                <td scope="row" ng-bind="empresa.nomeEmpresa"></td>
+                <td scope="row">{{ empresa.ufEmpresa | uppercase }}</td>
+                <td scope="row">{{ empresa.cnpjEmpresa | cnpj }}</td>
                 <td scope="row">&nbsp;</td>
 
                 <td scope="row">
-                    <a href="#/empresa/0" class="btn btn-success">Alterar</a>
+                    <a href="#/empresa/{{ empresa.idEmpresa }}" class="btn btn-success">Alterar</a>
                 </td>
 
                 <td scope="row">
-                    <button type="button" class="btn btn-danger">Alterar</button>
+                    <button type="button" class="btn btn-danger" ng-click="excluir(empresa.idEmpresa, empresa.nomeEmpresa)">Excluir</button>
                 </td>
             </tr>
         </tbody>

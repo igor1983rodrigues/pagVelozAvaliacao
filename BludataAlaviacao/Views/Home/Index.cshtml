@@ -1,7 +1,7 @@
 ﻿@{ Layout = null;}
 
 <!DOCTYPE html>
-<html lang="pt-BR" prefix="og: http://ogp.me/ns#">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -51,7 +51,7 @@
 
     <div class="position-fixed fixed-top h-100 w-100 fade bg-dark row align-items-center o-75" ng-class="{'show': !!fade}" ng-style="{'display': !!fade ? 'block': 'none'}">
 
-        <div class="container position-relative ml-auto mr-auto text-center">
+        <div class="container position-relative ml-auto mr-auto mt-auto text-center align-middle">
             <div class="spinner-grow text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -85,11 +85,10 @@
             <div class="modal-content">
                 <div class="modal-header" ng-class="{
                      'bg-danger': !!modal.danger,
-                     'text-white': !!modal.danger,
-                     'bg-success': !!modal.success,
-                     'text-white': !!modal.success
+                     'text-white': !!modal.danger || !!modal.success,
+                     'bg-success': !!modal.success
                      }">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <h5 class="modal-title" id="">{{ modal.title }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modal = {}">
                         <span aria-hidden="true">&times;</span>
                     </button>

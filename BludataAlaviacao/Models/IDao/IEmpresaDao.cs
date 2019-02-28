@@ -6,6 +6,5 @@ namespace BludataAlaviacao.Models.IDao
 {
     public interface IEmpresaDao : IBaseDaoInterface<Empresa>
     {
-        IEnumerable<Empresa> ObterListaEmpresa(object parametros, string strConexao);
     }
 }

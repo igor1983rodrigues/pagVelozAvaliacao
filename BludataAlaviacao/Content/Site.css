@@ -118,8 +118,25 @@ body {
         border-color: #985f0d;
     }
 
-.lh-100 {
-    line-height: 1;
+.button-reset {
+    background: rgba(0,0,0,0);
+    border: none;
+    cursor: pointer;
+    font-family: fa5-proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+}
+
+.v-center {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.right-1 {
+    right: 2rem;
 }
 
 .lh-125 {
