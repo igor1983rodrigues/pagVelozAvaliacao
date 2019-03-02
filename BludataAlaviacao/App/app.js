@@ -136,5 +136,3 @@ app.filter('cnpj', function () {
         return out;
     };
 });
-
-window.app = app;

@@ -203,15 +203,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\WebApi\EmpresaApiController.cs" />
+    <Compile Include="Areas\WebApi\FornecedorApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Dao\EmpresaDao.cs" />
+    <Compile Include="Models\Dao\FornecedorDao.cs" />
     <Compile Include="Models\Entity\Empresa.cs" />
     <Compile Include="Models\Entity\Fornecedor.cs" />
     <Compile Include="Models\Entity\Telefone.cs" />
     <Compile Include="Models\IDao\IEmpresaDao.cs" />
+    <Compile Include="Models\IDao\IFornecedorDao.cs" />
     <Compile Include="Models\Resources\EmpresaQuery.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
