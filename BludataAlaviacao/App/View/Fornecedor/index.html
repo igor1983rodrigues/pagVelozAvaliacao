@@ -15,8 +15,8 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" class="border-top-0">#</th>
+                <th scope="col" class="border-top-0">Fornecedor</th>
                 <th scope="col" class="border-top-0">Empresa</th>
-                <th scope="col" class="border-top-0">CPF ou CNPJ</th>
                 <th scope="col" class="border-top-0">Data/hora de cadastro</th>
 
                 <th scope="col" class="border-top-0 text-right pr-0" colspan="3">
@@ -29,10 +29,10 @@
 
         <tbody>
             <tr ng-repeat="fornecedor in fornecedores | filter:fornecedorSearch">
-                <td scope="row">0</td>
-                <td scope="row">0</td>
-                <td scope="row">0</td>
-                <td scope="row">0</td>
+                <td scope="row" ng-bind="fornecedor.idFornecedor"></td>
+                <td scope="row" ng-bind="fornecedor.nomeFornecedor"></td>
+                <td scope="row" ng-bind="fornecedor.empresa.nomeEmpresa"></td>
+                <td scope="row">{{ fornecedor.dataCadastroFornecedor | date:"dd/MM/yyyy HH:mm" }}</td>
 
                 <td scope="row">&nbsp;</td>
 
@@ -41,7 +41,7 @@
                 </td>
 
                 <td scope="row" class="text-right">
-                    <button type="button" class="btn btn-danger">Excluir</button>
+                    <button type="button" class="btn btn-danger" ng-click="excluir(fornecedor.idFornecedor, fornecedor.nomeFornecedor)">Excluir</button>
                 </td>
             </tr>
         </tbody>

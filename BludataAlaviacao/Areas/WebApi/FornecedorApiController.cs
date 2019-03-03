@@ -8,14 +8,24 @@ using System.Web.Http;
 namespace BludataAlaviacao.Areas.WebApi
 {
     [RoutePrefix("api/fornecedor")]
-    public class FornecedorApiController: ApiController
+    public class FornecedorApiController : ApiController
     {
         private IFornecedorDao iFornecedorDao;
+        private IFornecedorPessoaFisicaDao iFornecedorPessoaFisicaDao;
+        private IFornecedorPessoaJuridicaDao iFornecedorPessoaJuridicaDao;
+        private ITelefoneDao iTelefoneDao;
         private string mensagem;
 
-        public FornecedorApiController(IFornecedorDao iFornecedorDao)
+        public FornecedorApiController(
+            IFornecedorDao iFornecedorDao,
+            IFornecedorPessoaFisicaDao iFornecedorPessoaFisicaDao,
+            IFornecedorPessoaJuridicaDao iFornecedorPessoaJuridicaDao,
+            ITelefoneDao iTelefoneDao)
         {
             this.iFornecedorDao = iFornecedorDao;
+            this.iFornecedorPessoaFisicaDao = iFornecedorPessoaFisicaDao;
+            this.iFornecedorPessoaJuridicaDao = iFornecedorPessoaJuridicaDao;
+            this.iTelefoneDao = iTelefoneDao;
         }
 
         [HttpGet]
@@ -24,7 +34,7 @@ namespace BludataAlaviacao.Areas.WebApi
         {
             try
             {
-                var res = await Task.Run(() => iFornecedorDao.ObterTodos(Resources.Conexao));
+                var res = await Task.Run(() => iFornecedorDao.ObterFornecedorList(new { }, Resources.Conexao));
 
                 return Ok(res);
             }
@@ -58,8 +68,8 @@ namespace BludataAlaviacao.Areas.WebApi
             {
                 mensagem = null;
                 Fornecedor model = parametros.ToObject<Fornecedor>();
-                int res = await Task.Run(() => iFornecedorDao.Inserir(model, out mensagem, Resources.Conexao));
 
+                int res = await Task.Run(() => iFornecedorDao.Inserir(model, out mensagem, Resources.Conexao));
                 if (!string.IsNullOrEmpty(mensagem))
                 {
                     throw new System.Exception(mensagem);
@@ -111,7 +121,11 @@ namespace BludataAlaviacao.Areas.WebApi
             try
             {
                 mensagem = null;
-                await Task.Run(() => iFornecedorDao.Excluir(id, out mensagem, Resources.Conexao));
+
+                await Task.Run(() => iTelefoneDao.ExcluirLista(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
+                await Task.Run(() => iFornecedorPessoaFisicaDao.ExcluirLista(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
+                await Task.Run(() => iFornecedorPessoaJuridicaDao.ExcluirLista(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
+                await Task.Run(() => iFornecedorDao.Excluir(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
 
                 if (!string.IsNullOrEmpty(mensagem))
                 {

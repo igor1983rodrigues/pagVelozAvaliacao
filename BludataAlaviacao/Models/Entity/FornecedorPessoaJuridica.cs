@@ -3,19 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BludataAlaviacao.Models.Entity
 {
-    [Table("tbl_telefone")]
-    public class Telefone
+    [Table("tbl_fornecedor_pj")]
+    public class FornecedorPessoaJuridica
     {
         [Key]
-        [Column("id_telefone")]
-        public int IdTelefone { get; set; }
-
+        [Required]
         [Column("id_fornecedor")]
         public int IdFornecedor { get; set; }
 
-        [Column("numero_telefone")]
-        [StringLength(11, ErrorMessage = "Quantidade de caracteres excedida.")]
-        public string NumeroTelefone { get; set; }
+        [Column("cnpj_fornecedor_pj")]
+        [StringLength(14, ErrorMessage = "CNPJ possui apenas 14 caracteres")]
+        public string CnpjFornecedorPessoaJuridica { get; set; }
 
         [NotMapped]
         public Fornecedor Fornecedor { get; set; }

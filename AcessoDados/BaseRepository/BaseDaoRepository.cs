@@ -65,6 +65,28 @@ namespace AcessoDados.BaseRepository
             }
         }
 
+        public virtual void ExcluirLista(object obj, out string mensagem, string strConexao)
+        {
+            using (var conn = ObterConexao(strConexao))
+            {
+                try
+                {
+                    conn.Open();
+                    int id = conn.DeleteList<T>(obj);
+                    if (id == 0) throw new Exception("Erro ao excluir os dados. Entre em contato com o administrador.");
+                    mensagem = null;
+                }
+                catch (Exception ex)
+                {
+                    mensagem = ex.Message;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public virtual int Inserir(T model, out string mensagem, string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
