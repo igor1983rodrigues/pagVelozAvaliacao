@@ -20,7 +20,7 @@
                 <th scope="col" class="border-top-0 w-50">CNPJ</th>
                 <th scope="col" class="border-top-0 text-right pr-0" colspan="3">
                     <a href="#/empresa/add" class="btn btn-primary">
-                        Cadastrar
+                        <i class="fas fa-plus"></i>Cadastrar
                     </a>
                 </th>
             </tr>
@@ -35,11 +35,15 @@
                 <td scope="row">&nbsp;</td>
 
                 <td scope="row">
-                    <a href="#/empresa/{{ empresa.idEmpresa }}" class="btn btn-success">Alterar</a>
+                    <a href="#/empresa/{{ empresa.idEmpresa }}" class="btn btn-success">
+                        <i class="fas fa-edit"></i>Alterar
+                    </a>
                 </td>
 
                 <td scope="row">
-                    <button type="button" class="btn btn-danger" ng-click="excluir(empresa.idEmpresa, empresa.nomeEmpresa)">Excluir</button>
+                    <button type="button" class="btn btn-danger" ng-click="excluir(empresa.idEmpresa, empresa.nomeEmpresa)">
+                        <i class="fas fa-trash-alt"></i>Excluir
+                    </button>
                 </td>
             </tr>
         </tbody>

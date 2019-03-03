@@ -122,10 +122,7 @@ namespace BludataAlaviacao.Areas.WebApi
             {
                 mensagem = null;
 
-                await Task.Run(() => iTelefoneDao.ExcluirLista(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
-                await Task.Run(() => iFornecedorPessoaFisicaDao.ExcluirLista(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
-                await Task.Run(() => iFornecedorPessoaJuridicaDao.ExcluirLista(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
-                await Task.Run(() => iFornecedorDao.Excluir(new { IdFornecedor = id }, out mensagem, Resources.Conexao));
+                await Task.Run(() => iFornecedorDao.Excluir(id, out mensagem, Resources.Conexao));
 
                 if (!string.IsNullOrEmpty(mensagem))
                 {

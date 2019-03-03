@@ -1,50 +1,83 @@
 ﻿<div class="bg-dark rounded shadow-sm p-3 w-auto" ng-init="startGrid()">
     <div class="row">
-        <div class="col">
-            <h3 class="h3 text-white">Fornecedores Cadastradas</h3>
+        <div class=" col-3 text-white">
+            <h6 class="h6">Filtro</h6>
+
+            <div class="form-group">
+                <label for="filtroNome">Fornecedor</label>
+                <input id="filtroNome" ng-model="filtro.nomeFornecedor" class="form-control" type="text" placeholder="Nome do Fornecedor" />
+            </div>
+
+            <div class="form-group">
+                <label for="filtroEmpresa">Empresa</label>
+                <input id="filtroEmpresa" ng-model="filtro.empresa.nomeEmpresa" class="form-control" type="text" placeholder="Nome da empresa" />
+            </div>
+
+            <div class="form-group">
+                <label for="filtroEmpresa">Documento (CPF ou CNPJ)</label>
+                <input id="filtroEmpresa" ng-model="filtro.documento" class="form-control" type="tel" placeholder="Somente números" />
+            </div>
+
+            <div class="form-group">
+                <label for="dataCadastroFornecedor">Data de Cadastro</label>
+                <input id="dataCadastroFornecedor" ng-model="filtro.dataCadastroFornecedor" class="form-control" type="date" />
+            </div>
         </div>
-        <div class="col-3 text-right" ng-if="fornecedores.length > 0">
-            <input type="text" class="form-control" ng-model="fornecedorSearch" placeholder="pesquisar" />
-            <button type="button" class="button-reset position-absolute v-center right-1" style="opacity: 0.5;">
-                <i class="fas fa-search"></i>
-            </button>
+
+        <div class="col">
+
+            <div class="row">
+                <div class="col">
+                    <h3 class="h3 text-white">Fornecedores Cadastradas</h3>
+                </div>
+                <!-- div class="col-3 text-right" ng-if="fornecedores.length > 0">
+                    <input type="text" class="form-control" ng-model="filtro.$" placeholder="pesquisar" />
+                    <button type="button" class="button-reset position-absolute v-center right-1" style="opacity: 0.5;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div -->
+            </div>
+
+            <table class="table bg-white">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="border-top-0">#</th>
+                        <th scope="col" class="border-top-0">Fornecedor</th>
+                        <th scope="col" class="border-top-0">Empresa</th>
+                        <th scope="col" class="border-top-0">Data/hora de cadastro</th>
+
+                        <th scope="col" class="border-top-0 text-right pr-0" colspan="3">
+                            <a href="#/fornecedor/add" class="btn btn-primary">
+                                <i class="fas fa-plus"></i>Cadastrar
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="fornecedor in fornecedores | filtroFornecedor:filtro">
+                        <td scope="row" ng-bind="fornecedor.idFornecedor"></td>
+                        <td scope="row" ng-bind="fornecedor.nomeFornecedor"></td>
+                        <td scope="row" ng-bind="fornecedor.empresa.nomeEmpresa"></td>
+                        <td scope="row">{{ fornecedor.dataCadastroFornecedor | date:"dd/MM/yyyy HH:mm" }}</td>
+
+                        <td scope="row">&nbsp;</td>
+
+                        <td scope="row" class="text-right">
+                            <a href="#/fornecedor/{{ fornecedor.idFornecedor }}" class="btn btn-success">
+                                <i class="fas fa-edit"></i>Alterar
+                            </a>
+                        </td>
+
+                        <td scope="row" class="text-right">
+                            <button type="button" class="btn btn-danger" ng-click="excluir(fornecedor.idFornecedor, fornecedor.nomeFornecedor)">
+                                <i class="fas fa-trash-alt"></i>Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h6 class="h6 text-white" ng-if="!fornecedores || fornecedores.length == 0">Não há fornecedor cadastrado.</h6>
         </div>
     </div>
-
-    <table class="table bg-white">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col" class="border-top-0">#</th>
-                <th scope="col" class="border-top-0">Fornecedor</th>
-                <th scope="col" class="border-top-0">Empresa</th>
-                <th scope="col" class="border-top-0">Data/hora de cadastro</th>
-
-                <th scope="col" class="border-top-0 text-right pr-0" colspan="3">
-                    <a href="#/fornecedor/add" class="btn btn-primary">
-                        Cadastrar
-                    </a>
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr ng-repeat="fornecedor in fornecedores | filter:fornecedorSearch">
-                <td scope="row" ng-bind="fornecedor.idFornecedor"></td>
-                <td scope="row" ng-bind="fornecedor.nomeFornecedor"></td>
-                <td scope="row" ng-bind="fornecedor.empresa.nomeEmpresa"></td>
-                <td scope="row">{{ fornecedor.dataCadastroFornecedor | date:"dd/MM/yyyy HH:mm" }}</td>
-
-                <td scope="row">&nbsp;</td>
-
-                <td scope="row" class="text-right">
-                    <a href="#/fornecedor/0" class="btn btn-success">Alterar</a>
-                </td>
-
-                <td scope="row" class="text-right">
-                    <button type="button" class="btn btn-danger" ng-click="excluir(fornecedor.idFornecedor, fornecedor.nomeFornecedor)">Excluir</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <h6 class="h6 text-white" ng-if="!fornecedores || fornecedores.length == 0">Não há fornecedor cadastrado.</h6>
 </div>

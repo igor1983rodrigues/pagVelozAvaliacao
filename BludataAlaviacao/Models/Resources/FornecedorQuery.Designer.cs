@@ -68,10 +68,10 @@ namespace BludataAlaviacao.Models.Resources {
         ///		Empresa.id_empresa as IdEmpresa,
         ///		Empresa.nome_empresa as NomeEmpresa,
         ///		Empresa.cnpj_empresa as CnpjEmpresa,
-        ///		Empresa.uf_empresa as UfEmpresa
-        ///from	public.tbl_fornecedor as Fornecedor
-        ///inner	join public.tbl_empresa as Empresa on Fornecedor.id_empresa = Empresa.id_empresa
-        ///where	1=1.
+        ///		Empresa.uf_empresa as UfEmpresa,
+        ///		FornecedorPessoaJuridica.id_fornecedor as IdFornecedor,
+        ///		FornecedorPessoaJuridica.cnpj_fornecedor_pj as CnpjFornecedorPessoaJuridica,
+        ///		FornecedorPessoaFisica [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetAll {
             get {

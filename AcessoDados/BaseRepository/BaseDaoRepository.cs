@@ -111,7 +111,7 @@ namespace AcessoDados.BaseRepository
             }
         }
 
-        public IEnumerable<T> Obter(object parametros, string strConexao)
+        public virtual IEnumerable<T> Obter(object parametros, string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
             {
@@ -131,7 +131,7 @@ namespace AcessoDados.BaseRepository
             }
         }
 
-        public T ObterPorChave(object parametros, string strConexao)
+        public virtual T ObterPorChave(object parametros, string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
             {
@@ -151,7 +151,7 @@ namespace AcessoDados.BaseRepository
             }
         }
 
-        public IEnumerable<T> ObterTodos(string strConexao)
+        public virtual IEnumerable<T> ObterTodos(string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
             {

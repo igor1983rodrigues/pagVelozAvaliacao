@@ -125,9 +125,17 @@
 		Empresa.id_empresa as IdEmpresa,
 		Empresa.nome_empresa as NomeEmpresa,
 		Empresa.cnpj_empresa as CnpjEmpresa,
-		Empresa.uf_empresa as UfEmpresa
+		Empresa.uf_empresa as UfEmpresa,
+		FornecedorPessoaJuridica.id_fornecedor as IdFornecedor,
+		FornecedorPessoaJuridica.cnpj_fornecedor_pj as CnpjFornecedorPessoaJuridica,
+		FornecedorPessoaFisica.id_fornecedor as IdFornecedor,
+		FornecedorPessoaFisica.cpf_fornecedor_pf as CpfFornecedorPessoaFisica,
+		FornecedorPessoaFisica.dt_nasc_fornecedor_pf as DataNascimentoFornecedorPessoaFisica,
+		FornecedorPessoaFisica.rg_fornecedor_pf as RgFornecedorPessoaFisica
 from	public.tbl_fornecedor as Fornecedor
 inner	join public.tbl_empresa as Empresa on Fornecedor.id_empresa = Empresa.id_empresa
+left 	outer join public.tbl_fornecedor_pj as FornecedorPessoaJuridica on Fornecedor.id_fornecedor = FornecedorPessoaJuridica.id_fornecedor
+left 	outer join public.tbl_fornecedor_pf as FornecedorPessoaFisica on Fornecedor.id_fornecedor = FornecedorPessoaFisica.id_fornecedor
 where	1=1</value>
   </data>
 </root>
