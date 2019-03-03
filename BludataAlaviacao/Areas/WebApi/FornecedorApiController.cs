@@ -7,15 +7,25 @@ using System.Web.Http;
 
 namespace BludataAlaviacao.Areas.WebApi
 {
-    [RoutePrefix("api/empresa")]
-    public class EmpresaApiController : ApiController
+    [RoutePrefix("api/fornecedor")]
+    public class FornecedorApiController : ApiController
     {
-        private IEmpresaDao iEmpresaDao;
+        private IFornecedorDao iFornecedorDao;
+        private IFornecedorPessoaFisicaDao iFornecedorPessoaFisicaDao;
+        private IFornecedorPessoaJuridicaDao iFornecedorPessoaJuridicaDao;
+        private ITelefoneDao iTelefoneDao;
         private string mensagem;
 
-        public EmpresaApiController(IEmpresaDao iEmpresaDao)
+        public FornecedorApiController(
+            IFornecedorDao iFornecedorDao,
+            IFornecedorPessoaFisicaDao iFornecedorPessoaFisicaDao,
+            IFornecedorPessoaJuridicaDao iFornecedorPessoaJuridicaDao,
+            ITelefoneDao iTelefoneDao)
         {
-            this.iEmpresaDao = iEmpresaDao;
+            this.iFornecedorDao = iFornecedorDao;
+            this.iFornecedorPessoaFisicaDao = iFornecedorPessoaFisicaDao;
+            this.iFornecedorPessoaJuridicaDao = iFornecedorPessoaJuridicaDao;
+            this.iTelefoneDao = iTelefoneDao;
         }
 
         [HttpGet]
@@ -24,7 +34,7 @@ namespace BludataAlaviacao.Areas.WebApi
         {
             try
             {
-                var res = await Task.Run(() => iEmpresaDao.ObterTodos(Resources.Conexao));
+                var res = await Task.Run(() => iFornecedorDao.ObterFornecedorList(new { }, Resources.Conexao));
 
                 return Ok(res);
             }
@@ -40,7 +50,7 @@ namespace BludataAlaviacao.Areas.WebApi
         {
             try
             {
-                var res = await Task.Run(() => iEmpresaDao.ObterPorChave(id, Resources.Conexao));
+                var res = await Task.Run(() => iFornecedorDao.ObterPorChave(id, Resources.Conexao));
 
                 return Ok(res);
             }
@@ -57,14 +67,16 @@ namespace BludataAlaviacao.Areas.WebApi
             try
             {
                 mensagem = null;
-                Empresa model = parametros.ToObject<Empresa>();
-                int res = await Task.Run(() => iEmpresaDao.Inserir(model, out mensagem, Resources.Conexao));
+                Fornecedor model = parametros.ToObject<Fornecedor>();
 
-                if (!string.IsNullOrEmpty(mensagem)) {
+                int res = await Task.Run(() => iFornecedorDao.Inserir(model, out mensagem, Resources.Conexao));
+                if (!string.IsNullOrEmpty(mensagem))
+                {
                     throw new System.Exception(mensagem);
                 }
 
-                return Ok(new {
+                return Ok(new
+                {
                     Id = res,
                     Message = "Registro salvo com sucesso!"
                 });
@@ -82,8 +94,8 @@ namespace BludataAlaviacao.Areas.WebApi
             try
             {
                 mensagem = null;
-                Empresa model = parametros.ToObject<Empresa>();
-                await Task.Run(() => iEmpresaDao.Alterar(model, out mensagem, Resources.Conexao));
+                Fornecedor model = parametros.ToObject<Fornecedor>();
+                await Task.Run(() => iFornecedorDao.Alterar(model, out mensagem, Resources.Conexao));
 
                 if (!string.IsNullOrEmpty(mensagem))
                 {
@@ -92,7 +104,7 @@ namespace BludataAlaviacao.Areas.WebApi
 
                 return Ok(new
                 {
-                    Id = model.IdEmpresa,
+                    Id = model.IdFornecedor,
                     Message = "Registro alterado com sucesso!"
                 });
             }
@@ -109,7 +121,8 @@ namespace BludataAlaviacao.Areas.WebApi
             try
             {
                 mensagem = null;
-                await Task.Run(() => iEmpresaDao.Excluir(id, out mensagem, Resources.Conexao));
+
+                await Task.Run(() => iFornecedorDao.Excluir(id, out mensagem, Resources.Conexao));
 
                 if (!string.IsNullOrEmpty(mensagem))
                 {

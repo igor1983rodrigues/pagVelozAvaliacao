@@ -15,7 +15,11 @@ namespace BludataAlaviacao
     {
         public static void Configurar(this Container container)
         {
+            container.Register<ITelefoneDao, TelefoneDao>();
             container.Register<IEmpresaDao, EmpresaDao>();
+            container.Register<IFornecedorDao, FornecedorDao>();
+            container.Register<IFornecedorPessoaFisicaDao, FornecedorPessoaFisicaDao>();
+            container.Register<IFornecedorPessoaJuridicaDao, FornecedorPessoaJuridicaDao>();
         }
     }
 

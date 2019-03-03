@@ -8,9 +8,5 @@ namespace BludataAlaviacao.Models.Dao
 {
     public class EmpresaDao : BaseDaoRepository<Empresa>, IEmpresaDao
     {
-        public IEnumerable<Empresa> ObterListaEmpresa(object parametros, string strConexao)
-        {
-            return ExecuteQuery(EmpresaQuery.GetAll, parametros, strConexao, System.Data.CommandType.Text);
-        }
     }
 }

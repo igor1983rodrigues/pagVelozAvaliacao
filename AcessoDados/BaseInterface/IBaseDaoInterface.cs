@@ -10,6 +10,8 @@ namespace AcessoDados.BaseInterface
 
         void Excluir(object obj, out string mensagem, string strConexao);
 
+        void ExcluirLista(object obj, out string mensagem, string strConexao);
+
         T ObterPorChave(object parametros, string strConexao);
 
         IEnumerable<T> Obter(object parametros, string strConexao);

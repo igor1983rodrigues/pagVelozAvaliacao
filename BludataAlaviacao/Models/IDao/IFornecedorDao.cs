@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace BludataAlaviacao.Models.IDao
 {
-    public interface IEmpresaDao : IBaseDaoInterface<Empresa>
+    public interface IFornecedorDao : IBaseDaoInterface<Fornecedor>
     {
+        IEnumerable<Fornecedor> ObterFornecedorList(object @params, string strConexao);
     }
 }

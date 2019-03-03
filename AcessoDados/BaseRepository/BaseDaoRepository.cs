@@ -1,11 +1,13 @@
 ﻿using AcessoDados.BaseInterface;
 using Dapper;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace AcessoDados.BaseRepository
 {
@@ -14,8 +16,8 @@ namespace AcessoDados.BaseRepository
         protected DbConnection ObterConexao(string strConexao)
         {
             string strConnectionString = ConfigurationManager.ConnectionStrings[strConexao].ConnectionString;
-
-            return new Npgsql.NpgsqlConnection(strConnectionString);
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.PostgreSQL);
+            return new NpgsqlConnection(strConnectionString);
             //return new SqlConnection(strConnectionString);
         }
 
@@ -63,6 +65,28 @@ namespace AcessoDados.BaseRepository
             }
         }
 
+        public virtual void ExcluirLista(object obj, out string mensagem, string strConexao)
+        {
+            using (var conn = ObterConexao(strConexao))
+            {
+                try
+                {
+                    conn.Open();
+                    int id = conn.DeleteList<T>(obj);
+                    if (id == 0) throw new Exception("Erro ao excluir os dados. Entre em contato com o administrador.");
+                    mensagem = null;
+                }
+                catch (Exception ex)
+                {
+                    mensagem = ex.Message;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public virtual int Inserir(T model, out string mensagem, string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
@@ -87,7 +111,7 @@ namespace AcessoDados.BaseRepository
             }
         }
 
-        public IEnumerable<T> Obter(object parametros, string strConexao)
+        public virtual IEnumerable<T> Obter(object parametros, string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
             {
@@ -107,7 +131,7 @@ namespace AcessoDados.BaseRepository
             }
         }
 
-        public T ObterPorChave(object parametros, string strConexao)
+        public virtual T ObterPorChave(object parametros, string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
             {
@@ -127,7 +151,7 @@ namespace AcessoDados.BaseRepository
             }
         }
 
-        public IEnumerable<T> ObterTodos(string strConexao)
+        public virtual IEnumerable<T> ObterTodos(string strConexao)
         {
             using (var conn = ObterConexao(strConexao))
             {
